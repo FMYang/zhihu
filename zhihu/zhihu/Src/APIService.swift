@@ -32,6 +32,8 @@ protocol APITarget {
 
 class APIService {
     
+    static var enableLog = true
+    
     // 公共请求头
     static var commonHeaders: [String: String]?
     
@@ -85,9 +87,12 @@ class APIService {
     
     
     // 公共请求接口 - 不使用combine
-    static func request(target: APITarget,
+    @discardableResult
+    static func request<T: Decodable>(target: APITarget,
+                                      type: T.Type = T.self,
                                       encoding: ParameterEncoding = URLEncoding.default,
-                                       interceptor: RequestInterceptor? = nil) -> DataRequest {
+                                      interceptor: RequestInterceptor? = nil,
+                                      completionHandler: @escaping (AFDataResponse<T>) -> Void) -> DataRequest {
         // timeout
         var modifier: Session.RequestModifier? = nil
         if let timeoutInterval = target.timeoutInterval {
@@ -108,6 +113,7 @@ class APIService {
                                  requestModifier: modifier)
         .validate()
         .responseData(completionHandler: { logPrint($0) })
+        .responseDecodable(of: type, completionHandler: completionHandler)
     }
     
     // 格式化网络请求结果
@@ -139,12 +145,12 @@ class APIService {
         log += "params: \n\(params)\n\n"
         log += "statusCode: \n\(statusCode)\n\n"
         log += "timeout: \n\(timeout)\n\n"
-        log += "result: \n\(result)\n\n"
+        log += "response: \n\(result)\n\n"
         log += "============================== End Request ==============================\n"
         
-#if DEBUG
-        print(log)
-#endif
+        if enableLog {
+            print(log)
+        }
     }
 }
 

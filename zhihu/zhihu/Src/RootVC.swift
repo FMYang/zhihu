@@ -12,9 +12,10 @@ import SnapKit
 class RootVC: UIViewController {
     
     var subscriptions = Set<AnyCancellable>()
-    var page = 1 {
+    var curDate = "" {
         didSet {
-            ListAPI.page = page
+            jumpButton.setTitle(curDate, for: .normal)
+            tableView.headRefreshControl.beginRefreshing()
         }
     }
     
@@ -33,12 +34,32 @@ class RootVC: UIViewController {
         return view
     }()
     
+    lazy var jumpButton: UIButton = {
+        let btn = UIButton()
+        btn.titleLabel?.font = .systemFont(ofSize: 16)
+        btn.setTitle("\(curDate)", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.addTarget(self, action: #selector(jumpAction), for: .touchUpInside)
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "知乎"
+        title = "知乎热榜"
         configNavation()
         makeUI()
         addRefresh()
+        curDate = getCurDate()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        jumpButton.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        jumpButton.isHidden = false
     }
     
     func configNavation() {
@@ -50,53 +71,40 @@ class RootVC: UIViewController {
         appearance.backgroundImage = UIImage.imageWithColor(color: .white)
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        navigationController?.navigationBar.addSubview(jumpButton)
+        jumpButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.width.equalTo(100)
+            make.top.bottom.equalToSuperview()
+        }
+    }
+    
+    func getCurDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
     }
     
     func addRefresh() {
         self.tableView.bindGlobalStyle(forHeadRefreshHandler: { [weak self] in
-            self?.page = 1
             self?.loadData()
         })
-
-        self.tableView.bindGlobalStyle(forFootRefreshHandler: { [weak self] in
-            self?.loadData()
-        })
-
-        self.tableView.headRefreshControl.beginRefreshing()
     }
     
     func loadData() {
-        APIService.request(target: ListAPI.list).responseDecodable(of: [Item].self) { [weak self] response in
+        APIService.request(target: ListAPI.list(curDate),
+                           type: [Item].self) { [weak self] response in
             switch response.result {
             case .success(let items):
-                if self?.page == 1 {
-                    self?.datasource.removeAll()
-                }
-                self?.datasource += items
-                self?.page += 1
-                
-                if items.count == 0 {
-                    self?.tableView.footRefreshControl.endRefreshingAndNoLongerRefreshing(withAlertText: "没有数据了")
-                }
+                self?.datasource = items
             case .failure(let err):
                 print(err)
             }
             
             self?.tableView.headRefreshControl.endRefreshing()
-            self?.tableView.footRefreshControl.endRefreshing()
         }
-        
-        //        APIService.request(target: ListAPI.list,
-        //                           type: [Item].self)
-        //        .sink { response in
-        //            switch response.result {
-        //            case .success(let items):
-        //                print(items)
-        //            case .failure(let err):
-        //                print(err)
-        //            }
-        //        }
-        //        .store(in: &subscriptions)
     }
     
     func makeUI() {
@@ -104,6 +112,17 @@ class RootVC: UIViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+}
+
+extension RootVC {
+    @objc func jumpAction() {
+        let dateView = FMDatePickerView(date: curDate)
+        dateView.confirmBlock = { [weak self] year, month, day in
+            let text = String(format: "%d-%02d-%02d", year, month, day)
+            self?.curDate = text
+        }
+        navigationController?.view.addSubview(dateView)
     }
 }
 
