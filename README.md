@@ -1,2 +1,2 @@
 # zhihu
-zhihu without ad
+zhihu trending hot questions
