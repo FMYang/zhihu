@@ -15,7 +15,10 @@ class RootVC: UIViewController {
     var curDate = "" {
         didSet {
             jumpButton.setTitle(curDate, for: .normal)
-            tableView.headRefreshControl.beginRefreshing()
+            datasource = []
+            DispatchQueue.main.async {
+                self.tableView.headRefreshControl.beginRefreshing()
+            }
         }
     }
     
@@ -119,8 +122,7 @@ extension RootVC {
     @objc func jumpAction() {
         let dateView = FMDatePickerView(date: curDate)
         dateView.confirmBlock = { [weak self] year, month, day in
-            let text = String(format: "%d-%02d-%02d", year, month, day)
-            self?.curDate = text
+            self?.curDate = "\(year)-\(month)-\(day)"
         }
         navigationController?.view.addSubview(dateView)
     }
