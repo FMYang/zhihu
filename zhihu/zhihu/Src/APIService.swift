@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import Combine
+import os
 
 protocol APITarget {
     
@@ -58,7 +59,7 @@ class APIService {
     // 默认请求头
     static let defaultHeaders: HTTPHeaders = {
         var header = HTTPHeaders()
-        header.add(name: "platform", value: "iOS")
+//        header.add(name: "platform", value: "iOS")
         return header
     }()
     

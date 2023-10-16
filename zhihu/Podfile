@@ -9,5 +9,6 @@ target 'zhihu' do
   pod 'SnapKit'
   pod 'Alamofire'
   pod 'KafkaRefresh'
+  pod 'MBProgressHUD'
   
 end
