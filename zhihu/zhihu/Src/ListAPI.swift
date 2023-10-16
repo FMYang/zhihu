@@ -26,18 +26,6 @@ extension ListAPI: APITarget {
     }
     
     var params: [String : Any]? {
-        nil
-    }
-    
-    var method: HTTPMethod {
-        .get
-    }
-    
-    var headers: [String : String]? {
-        nil
-    }
-    
-    var timeoutInterval: TimeInterval? {
-        nil
+        return ["test": "1"]
     }
 }

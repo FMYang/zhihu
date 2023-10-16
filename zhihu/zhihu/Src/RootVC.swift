@@ -122,7 +122,8 @@ extension RootVC {
     @objc func jumpAction() {
         let dateView = FMDatePickerView(date: curDate)
         dateView.confirmBlock = { [weak self] year, month, day in
-            self?.curDate = "\(year)-\(month)-\(day)"
+            let text = String(format: "%d-%02d-%02d", year, month, day)
+            self?.curDate = text
         }
         navigationController?.view.addSubview(dateView)
     }

@@ -30,6 +30,24 @@ protocol APITarget {
     var timeoutInterval: TimeInterval? { get }
 }
 
+extension APITarget {
+    var params: [String : Any]? {
+        nil
+    }
+    
+    var method: HTTPMethod {
+        .get
+    }
+    
+    var headers: [String : String]? {
+        nil
+    }
+    
+    var timeoutInterval: TimeInterval? {
+        nil
+    }
+}
+
 class APIService {
     
     static var enableLog = true
@@ -120,9 +138,9 @@ class APIService {
     static func logPrint(_ response: AFDataResponse<Data>) {
         let url =  response.request?.url?.absoluteString ?? ""
         let method = response.request?.method?.rawValue ?? ""
-        var params = "nil"
+        var body = "nil"
         if let bodyData = response.request?.httpBody {
-            params = String(data: bodyData, encoding: .utf8) ?? "nil"
+            body = String(data: bodyData, encoding: .utf8) ?? "nil"
         }
         let statusCode = response.response?.statusCode ?? 404
         var result: String = ""
@@ -141,8 +159,8 @@ class APIService {
         log += "============================== Begin Request ==============================\n\n"
         log += "url: \n\(url)\n\n"
         log += "method: \n\(method)\n\n"
-        log += "requestHeaders: \n\(headers)\n\n"
-        log += "params: \n\(params)\n\n"
+        log += "headers: \n\(headers)\n\n"
+        log += "body: \n\(body)\n\n"
         log += "statusCode: \n\(statusCode)\n\n"
         log += "timeout: \n\(timeout)\n\n"
         log += "response: \n\(result)\n\n"
