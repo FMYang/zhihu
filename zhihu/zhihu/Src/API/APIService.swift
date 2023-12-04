@@ -107,7 +107,7 @@ class APIService {
     
     // 公共请求接口 - 不使用combine
     @discardableResult
-    static func request<T: Decodable>(target: APITarget,
+    static func request1<T: Decodable>(target: APITarget,
                                       type: T.Type = T.self,
                                       encoding: ParameterEncoding = URLEncoding.default,
                                       interceptor: RequestInterceptor? = nil,

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8813B9C42B04C108002F1F8E /* ZYPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813B9C32B04C107002F1F8E /* ZYPlayerView.swift */; };
 		882A1B972AD5584600D56D70 /* ListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A1B962AD5584600D56D70 /* ListAPI.swift */; };
 		882A1B992AD64A5200D56D70 /* IWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A1B982AD64A5100D56D70 /* IWebViewController.swift */; };
 		882A1B9B2AD7E8B700D56D70 /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A1B9A2AD7E8B700D56D70 /* Calendar+Extension.swift */; };
@@ -15,6 +16,11 @@
 		882A1BA12AD7EA2A00D56D70 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A1BA02AD7EA2A00D56D70 /* Constant.swift */; };
 		882A1BA32AD7EA5A00D56D70 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A1BA22AD7EA5A00D56D70 /* UIColor+Extension.swift */; };
 		882A1BA62ADD32EC00D56D70 /* UIView+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A1BA52ADD32EC00D56D70 /* UIView+HUD.swift */; };
+		888FF6A22B031F0B005F8966 /* ToutiaoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888FF6A12B031F0B005F8966 /* ToutiaoDetailVC.swift */; };
+		888FF6A92B032211005F8966 /* ToutiaoDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888FF6A82B032211005F8966 /* ToutiaoDetailAPI.swift */; };
+		8897A0EB2AFE015000E800A3 /* NewDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8897A0EA2AFE015000E800A3 /* NewDetailVC.swift */; };
+		8897A0ED2AFE01E200E800A3 /* DetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8897A0EC2AFE01E200E800A3 /* DetailAPI.swift */; };
+		8897A0EF2AFE163E00E800A3 /* SourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8897A0EE2AFE163E00E800A3 /* SourceView.swift */; };
 		88B795E22AD54E47003056B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B795E12AD54E47003056B1 /* AppDelegate.swift */; };
 		88B795E42AD54E47003056B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B795E32AD54E47003056B1 /* SceneDelegate.swift */; };
 		88B795E92AD54E47003056B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B795E72AD54E47003056B1 /* Main.storyboard */; };
@@ -29,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		1016A7DF588A10A0A6B21170 /* Pods-zhihu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhihu.debug.xcconfig"; path = "Target Support Files/Pods-zhihu/Pods-zhihu.debug.xcconfig"; sourceTree = "<group>"; };
+		8813B9C32B04C107002F1F8E /* ZYPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYPlayerView.swift; sourceTree = "<group>"; };
 		882A1B962AD5584600D56D70 /* ListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAPI.swift; sourceTree = "<group>"; };
 		882A1B982AD64A5100D56D70 /* IWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWebViewController.swift; sourceTree = "<group>"; };
 		882A1B9A2AD7E8B700D56D70 /* Calendar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+Extension.swift"; sourceTree = "<group>"; };
@@ -37,6 +44,11 @@
 		882A1BA02AD7EA2A00D56D70 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		882A1BA22AD7EA5A00D56D70 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		882A1BA52ADD32EC00D56D70 /* UIView+HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+HUD.swift"; sourceTree = "<group>"; };
+		888FF6A12B031F0B005F8966 /* ToutiaoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToutiaoDetailVC.swift; sourceTree = "<group>"; };
+		888FF6A82B032211005F8966 /* ToutiaoDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToutiaoDetailAPI.swift; sourceTree = "<group>"; };
+		8897A0EA2AFE015000E800A3 /* NewDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDetailVC.swift; sourceTree = "<group>"; };
+		8897A0EC2AFE01E200E800A3 /* DetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAPI.swift; sourceTree = "<group>"; };
+		8897A0EE2AFE163E00E800A3 /* SourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceView.swift; sourceTree = "<group>"; };
 		88B795DE2AD54E47003056B1 /* zhihu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B795E12AD54E47003056B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88B795E32AD54E47003056B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +96,8 @@
 		882A1BA42AD7EA6700D56D70 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				8813B9C32B04C107002F1F8E /* ZYPlayerView.swift */,
+				8897A0EE2AFE163E00E800A3 /* SourceView.swift */,
 				882A1B9C2AD7E93200D56D70 /* FMDatePickerView.swift */,
 				882A1B982AD64A5100D56D70 /* IWebViewController.swift */,
 				882A1B9A2AD7E8B700D56D70 /* Calendar+Extension.swift */,
@@ -93,6 +107,53 @@
 				882A1BA52ADD32EC00D56D70 /* UIView+HUD.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		888FF6A32B032078005F8966 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				88B795FC2AD550F1003056B1 /* APIService.swift */,
+				882A1B962AD5584600D56D70 /* ListAPI.swift */,
+				8897A0EC2AFE01E200E800A3 /* DetailAPI.swift */,
+				888FF6A82B032211005F8966 /* ToutiaoDetailAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		888FF6A42B0320F0005F8966 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				888FF6A72B03210E005F8966 /* View */,
+				888FF6A62B03210A005F8966 /* VC */,
+				888FF6A52B032105005F8966 /* Model */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		888FF6A52B032105005F8966 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88B795FA2AD550A2003056B1 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		888FF6A62B03210A005F8966 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				88B795F62AD54F74003056B1 /* RootVC.swift */,
+				8897A0EA2AFE015000E800A3 /* NewDetailVC.swift */,
+				888FF6A12B031F0B005F8966 /* ToutiaoDetailVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		888FF6A72B03210E005F8966 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88B795F82AD54FAA003056B1 /* ListCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		88B795D52AD54E47003056B1 = {
@@ -130,12 +191,9 @@
 		88B795F52AD54F58003056B1 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				888FF6A42B0320F0005F8966 /* Classes */,
+				888FF6A32B032078005F8966 /* API */,
 				882A1BA42AD7EA6700D56D70 /* Util */,
-				88B795FC2AD550F1003056B1 /* APIService.swift */,
-				88B795F62AD54F74003056B1 /* RootVC.swift */,
-				88B795F82AD54FAA003056B1 /* ListCell.swift */,
-				88B795FA2AD550A2003056B1 /* Model.swift */,
-				882A1B962AD5584600D56D70 /* ListAPI.swift */,
 			);
 			path = Src;
 			sourceTree = "<group>";
@@ -152,6 +210,7 @@
 				88B795DB2AD54E47003056B1 /* Frameworks */,
 				88B795DC2AD54E47003056B1 /* Resources */,
 				F76BE505020D724CB81A7F22 /* [CP] Embed Pods Frameworks */,
+				3C142F000B104AB4A720CC20 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -209,6 +268,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C142F000B104AB4A720CC20 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-zhihu/Pods-zhihu-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-zhihu/Pods-zhihu-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-zhihu/Pods-zhihu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A34B07E2DF32860235F7373D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,19 +332,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				882A1B9F2AD7E9FE00D56D70 /* UIView+Extension.swift in Sources */,
+				8897A0EB2AFE015000E800A3 /* NewDetailVC.swift in Sources */,
 				882A1B992AD64A5200D56D70 /* IWebViewController.swift in Sources */,
 				88B795F72AD54F74003056B1 /* RootVC.swift in Sources */,
+				888FF6A92B032211005F8966 /* ToutiaoDetailAPI.swift in Sources */,
 				882A1B9B2AD7E8B700D56D70 /* Calendar+Extension.swift in Sources */,
 				882A1B9D2AD7E93200D56D70 /* FMDatePickerView.swift in Sources */,
 				88B795FD2AD550F1003056B1 /* APIService.swift in Sources */,
+				8813B9C42B04C108002F1F8E /* ZYPlayerView.swift in Sources */,
+				8897A0ED2AFE01E200E800A3 /* DetailAPI.swift in Sources */,
 				88B795E22AD54E47003056B1 /* AppDelegate.swift in Sources */,
 				88B795FB2AD550A2003056B1 /* Model.swift in Sources */,
 				88B795F92AD54FAA003056B1 /* ListCell.swift in Sources */,
 				882A1B972AD5584600D56D70 /* ListAPI.swift in Sources */,
 				882A1BA62ADD32EC00D56D70 /* UIView+HUD.swift in Sources */,
+				888FF6A22B031F0B005F8966 /* ToutiaoDetailVC.swift in Sources */,
 				882A1BA32AD7EA5A00D56D70 /* UIColor+Extension.swift in Sources */,
 				88B795E42AD54E47003056B1 /* SceneDelegate.swift in Sources */,
 				882A1BA12AD7EA2A00D56D70 /* Constant.swift in Sources */,
+				8897A0EF2AFE163E00E800A3 /* SourceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +507,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = zhihu/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iNews;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -456,6 +539,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = zhihu/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = iNews;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

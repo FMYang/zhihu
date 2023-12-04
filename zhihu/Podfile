@@ -10,5 +10,6 @@ target 'zhihu' do
   pod 'Alamofire'
   pod 'KafkaRefresh'
   pod 'MBProgressHUD'
+  pod 'FDFullscreenPopGesture'
   
 end

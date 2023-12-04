@@ -14,15 +14,18 @@ class RootVC: UIViewController {
     
     var subscriptions = Set<AnyCancellable>()
     
-    var useGitlab: Bool = true {
+    var source: SourceView.Source = .zhihu {
         didSet {
-            changeButton.setTitle(useGitlab ? "gitlab" : "github", for: .normal)
+            sourceButton.setTitle(source.title, for: .normal)
+            loadData()
         }
     }
     
     var curDate = "" {
         didSet {
-            jumpButton.setTitle(curDate, for: .normal)
+            datasource = []
+            dateButton.setTitle(curDate, for: .normal)
+            loadData()
         }
     }
     
@@ -41,45 +44,55 @@ class RootVC: UIViewController {
         return view
     }()
     
-    lazy var jumpButton: UIButton = {
+    lazy var sourceButton: UIButton = {
+        let btn = UIButton()
+        btn.titleLabel?.font = .systemFont(ofSize: 16)
+        btn.setTitle("知乎热榜", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.contentHorizontalAlignment = .left
+        btn.addTarget(self, action: #selector(sourceAction), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var dateButton: UIButton = {
         let btn = UIButton()
         btn.titleLabel?.font = .systemFont(ofSize: 16)
         btn.setTitle("\(curDate)", for: .normal)
         btn.setTitleColor(.black, for: .normal)
+        btn.contentHorizontalAlignment = .right
         btn.addTarget(self, action: #selector(jumpAction), for: .touchUpInside)
-        return btn
-    }()
-    
-    lazy var changeButton: UIButton = {
-        let btn = UIButton()
-        btn.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-        btn.titleLabel?.font = .systemFont(ofSize: 16)
-        btn.setTitle("gitlab", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
-        btn.addTarget(self, action: #selector(changeAction), for: .touchUpInside)
         return btn
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "知乎热榜"
+        title = "要闻"
         configNavation()
         makeUI()
         addRefresh()
         curDate = getCurDate()
-        tableView.headRefreshControl.beginRefreshing()
+        addGesture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        jumpButton.isHidden = true
-        changeButton.isHidden = true
+        dateButton.isHidden = true
+        sourceButton.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        jumpButton.isHidden = false
-        changeButton.isHidden = false
+        dateButton.isHidden = false
+        sourceButton.isHidden = false
+    }
+    
+    func addGesture() {
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeGeture))
+        view.addGestureRecognizer(gesture)
+    }
+    
+    @objc func swipeGeture() {
+        sourceAction()
     }
     
     func configNavation() {
@@ -92,17 +105,17 @@ class RootVC: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        navigationController?.navigationBar.addSubview(jumpButton)
-        navigationController?.navigationBar.addSubview(changeButton)
-                
-        jumpButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
+        navigationController?.navigationBar.addSubview(sourceButton)
+        navigationController?.navigationBar.addSubview(dateButton)
+        
+        dateButton.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-10)
             make.width.equalTo(100)
             make.top.bottom.equalToSuperview()
         }
         
-        changeButton.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-10)
+        sourceButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
             make.width.equalTo(100)
             make.top.bottom.equalToSuperview()
         }
@@ -110,33 +123,21 @@ class RootVC: UIViewController {
     
     func addRefresh() {
         self.tableView.bindGlobalStyle(forHeadRefreshHandler: { [weak self] in
-            guard let self = self else { return }
-            self.loadData(refresh: true)
-        })
-        
-        self.tableView.bindGlobalStyle(forFootRefreshHandler: { [weak self] in
-            guard let self = self else { return }
-            self.curDate = self.getNextDate()
-            self.loadData(refresh: false)
+            self?.loadData()
         })
     }
-    
-    func loadData(refresh: Bool) {
-        APIService.request(target: ListAPI.list(curDate, useGitlab),
+        
+    func loadData() {
+        datasource = []
+        APIService.request1(target: ListAPI.list(curDate, source),
                            type: [Item].self) { [weak self] response in
             switch response.result {
             case .success(let items):
-                if refresh {
-                    self?.datasource = items
-                } else {
-                    self?.datasource += items
-                }
+                self?.datasource = items
             case .failure(let err):
                 self?.view.showToast("\(err.localizedDescription)")
             }
-            
             self?.tableView.headRefreshControl.endRefreshing()
-            self?.tableView.footRefreshControl.endRefreshing()
         }
     }
     
@@ -174,13 +175,19 @@ extension RootVC {
         dateView.confirmBlock = { [weak self] year, month, day in
             let text = String(format: "%d-%02d-%02d", year, month, day)
             self?.curDate = text
-            self?.tableView.headRefreshControl.beginRefreshing()
         }
         navigationController?.view.addSubview(dateView)
     }
     
-    @objc func changeAction() {
-        useGitlab.toggle()
+    @objc func sourceAction() {
+        let sourceView = SourceView(frame: UIScreen.main.bounds, type: source)
+        sourceView.dismiss = { [weak self] source in
+            if self?.source != source {
+                self?.source = source
+            }
+        }
+        sourceView.tag = 1001
+        navigationController?.view.addSubview(sourceView)
     }
 }
 
@@ -198,8 +205,16 @@ extension RootVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = datasource[indexPath.row]
-        if let url = item.url {
-            let vc = IWebViewController(urlPath: url)
+        if source == .sina {
+            let vc = NewDetailVC(item: item)
+            navigationController?.pushViewController(vc, animated: true)
+        } else if source == .zhihu || source == .netEase {
+            if let url = item.url {
+                let vc = IWebViewController(urlPath: url)
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        } else {
+            let vc = ToutiaoDetailVC(item: item)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
